@@ -29,10 +29,8 @@ function trainModel() {
   nn.train(trainingOptions, whileTraining, doneTraining)
 }
 
-function whileTraining(loss) {
-  if (loss) {
-    console.log(loss)
-  }
+function whileTraining(epoch, loss) {
+  console.log(`epoch: ${epoch}, loss: ${loss}`)
 }
 
 function doneTraining() {

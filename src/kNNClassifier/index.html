@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KNNClassifier</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
+  <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+</head>
+<body>
+  <div class="dogs">
+    <div class="dog">
+      <img id="dogA" src="./imgs/dogA.jpg" alt="dogA" width="300px">
+    </div>
+    <div class="cat">
+      <img id="catA" src="./imgs/cat.jpg" alt="catA" width="300px">
+    </div>
+    <div class="dog">
+      <img id="dogB" src="./imgs/dogB.jpg" alt="dogB" width="300px">
+    </div>
+  </div>
+  <script>
+    const knnClassifier = ml5.KNNClassifier();
+
+    const featureExtractor = ml5.featureExtractor('MobileNet', modelReady);
+
+    function modelReady() {
+      console.log('model ready!');
+      addExamples()
+      // do classification
+      const dogB = document.querySelector('#dogB');
+      const featuresB = featureExtractor.infer(dogB);
+      knnClassifier.classify(featuresB, (err, res) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+        console.log(res)
+      })
+    }
+
+    function addExamples() {
+      const dogA = document.querySelector('#dogA');
+      const featuresA = featureExtractor.infer(dogA);
+      knnClassifier.addExample(featuresA, 'dog');
+      const catA = document.querySelector('#catA');
+      const catfeaturesA = featureExtractor.infer(catA);
+      knnClassifier.addExample(catfeaturesA, 'cat');
+    }
+  </script>
+</body>
+</html>
