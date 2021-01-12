@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>特征提取器</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
+  <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+</head>
+<body>
+  <div class="dogs">
+    <div class="dog">
+      <img id="dogA" src="./imgs/dogA.jpg" alt="dogA" width="300px">
+    </div>
+    <div class="dog">
+      <img id="dogB" src="./imgs/dogB.jpg" alt="dogA" width="300px">
+    </div>
+  </div>
+  <script>
+    const featureExtractor = ml5.featureExtractor('MobileNet', modelReady);
+    let classifier;
+    function modelReady() {
+      console.log('model ready!')
+      classifier = featureExtractor.classification();
+      classifier.addImage(document.getElementById('dogA'), 'dog', imageAdded);
+    }
+    
+    function imageAdded() {
+      const trainOptions = {
+        epochs: 30,
+        batchSize: 24,
+      }
+      classifier.train(finishTraining)
+    }
+
+    function whileTraining(epoch, loss) {
+      console.log(`epoch: ${epoch}, loss: ${loss}`)
+    }
+
+    function finishTraining() {
+      console.log('training finish!')
+      doClassify()
+    }
+
+    function doClassify() {
+      classifier.classify(document.getElementById('#dogB', (err, res) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      console.log(res)
+    }))
+    }
+  </script>
+</body>
+</html>
