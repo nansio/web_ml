@@ -1,0 +1,15 @@
+{
+  "data": [
+    { "r" : 255, "g" : 177, "b" : 152, "color" : "red-ish" },
+    { "r" : 214, "g" : 150, "b" : 137, "color" : "red-ish" },
+    { "r" : 201, "g" : 12, "b" : 79, "color" : "red-ish" },
+  
+    { "r" : 153, "g" : 155, "b" : 66, "color" : "green-ish" },
+    { "r" : 25, "g" : 185, "b" : 155, "color" : "green-ish" },
+    { "r" : 250, "g" : 253, "b" : 183, "color" : "green-ish" },
+  
+    { "r" : 125, "g" : 10, "b" : 191, "color" : "blue-ish" },
+    { "r" : 15, "g" : 26, "b" : 65, "color" : "blue-ish" },
+    { "r" : 55, "g" : 123, "b" : 151, "color" : "blue-ish" }
+  ]
+}
