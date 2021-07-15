@@ -7,6 +7,7 @@ function preload() {
 }
 
 function setup() {
+  document.getElementById('text').textContent= 'Fetching model...';
   createCanvas(500, 556);
   handpose = ml5.handpose(modelReady);
 
@@ -15,9 +16,11 @@ function setup() {
 
 function modelReady() {
   console.log('Model ready!');
+  document.getElementById('text').textContent= 'Model ready...';
+  
   handpose.on('predict', gotResult);
-
   handpose.predict(img);
+  document.getElementById('text').textContent = 'done predicting';
 }
 
 function gotResult( result) {
